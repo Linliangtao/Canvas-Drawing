@@ -1,5 +1,6 @@
 var yyy = document.getElementById('xxx');
 var context = yyy.getContext('2d');
+var lineWidth = 5
 
 autoSetCanvasSize(yyy)
 
@@ -17,27 +18,39 @@ eraser.onclick = function(){
   eraser.classList.add('active')
   pen.classList.remove('active')
 }
+clear.onclick = function(){
+  context.clearRect(0,0,yyy.width, yyy.height)
+}
 
+/** */
 
-
-red.onclick =function(){
-  context.strokeStyle = 'red'
-  red.classList.add('active')
+black.onclick =function(){
+  context.strokeStyle = 'black'
+  black.classList.add('active')
   blue.classList.remove('active')
   green.classList.remove('active')
 }
 blue.onclick =function(){
   context.strokeStyle = 'blue'
   blue.classList.add('active')
-  red.classList.remove('active')
+  black.classList.remove('active')
   green.classList.remove('active')
 }
 green.onclick =function(){
   context.strokeStyle = 'green'
   green.classList.add('active')
-  red.classList.remove('active')
+  black.classList.remove('active')
   blue.classList.remove('active')
 }
+
+thin.onclick = function(){
+  lineWidth = 5
+}
+thick.onclick = function(){
+  lineWidth = 10
+}
+/** */
+
 /******/
 
 function autoSetCanvasSize(canvas) {
@@ -63,7 +76,7 @@ function drawCircle(x, y, radius) {
 function drawLine(x1, y1, x2, y2) {
   context.beginPath();
   context.moveTo(x1, y1) // 起点
-  context.lineWidth = 5
+  context.lineWidth = lineWidth
   context.lineTo(x2, y2) // 终点
   context.stroke()
   context.closePath()
